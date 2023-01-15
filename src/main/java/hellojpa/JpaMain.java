@@ -34,14 +34,41 @@ public class JpaMain {
 //            member.setName("seongheon");
 
             //jpql
-            List<Member> memberList = em.createQuery("select m from Member as m",Member.class)
-                    .setFirstResult(5)
-                    .setMaxResults(8)
-                    .getResultList();
+//            List<Member> memberList = em.createQuery("select m from Member as m",Member.class)
+//                    .setFirstResult(5)
+//                    .setMaxResults(8)
+//                    .getResultList();
 
-            for (Member member: memberList) {
-                System.out.println("member id:"+member.getId()+" name:" +member.getName());
-            }
+
+            //비영속
+//            Member member = new Member();
+//            member.setId(101L);
+//            member.setName("HelloJpa");
+
+            //영속
+//            System.out.println("===BEFORE===");
+//            em.persist(member);
+//            System.out.println("===AFTER===");
+//
+//            Member member1 = em.find(Member.class, 101L);
+//
+//            System.out.println("id:"+member1.getId()+" name:" + member.getName());
+
+            //영속상태에서의 1차 캐시, 쓰기지연 sql 저장소
+//            Member member = em.find(Member.class, 101L);
+//            Member member2 = em.find(Member.class, 101L);
+
+            Member member = new Member(155L,"A");
+            Member member2 = new Member(165L,"B");
+
+            em.persist(member);
+            System.out.println("================================");
+            em.persist(member2);
+
+            //준영속
+/*            em.detach(member2);
+            em.detach(member);
+            em.clear();*/
 
             //트랜잭션 커밋
             tx.commit();
