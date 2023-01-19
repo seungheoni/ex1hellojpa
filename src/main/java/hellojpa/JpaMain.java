@@ -18,59 +18,35 @@ public class JpaMain {
         tx.begin();
 
         try {
-            //추가
-            /*Member member = new Member();
-            member.setId(1L);
-            member.setName("HelloA");
-            em.persist(member);*/
+            Member member = new Member();
+            member.setUsername("micle");
 
-            //조회
-            /*Member member = em.find(Member.class, 1L);
-            System.out.println("findMember.id ="+member.getId());
-            System.out.println("findMember.name ="+member.getName());*/
+            Member member2 = new Member();
+            member2.setUsername("seongheon");
 
-            //수정
-//            Member member = em.find(Member.class, 1L);
-//            member.setName("seongheon");
+            Member member3 = new Member();
+            member3.setUsername("gildong");
 
-            //jpql
-//            List<Member> memberList = em.createQuery("select m from Member as m",Member.class)
-//                    .setFirstResult(5)
-//                    .setMaxResults(8)
-//                    .getResultList();
+            Member member4 = new Member();
+            member4.setUsername("gildong");
+
+            Member member5 = new Member();
+            member5.setUsername("gildong");
 
 
-            //비영속
-//            Member member = new Member();
-//            member.setId(101L);
-//            member.setName("HelloJpa");
-
-            //영속
-//            System.out.println("===BEFORE===");
-//            em.persist(member);
-//            System.out.println("===AFTER===");
-//
-//            Member member1 = em.find(Member.class, 101L);
-//
-//            System.out.println("id:"+member1.getId()+" name:" + member.getName());
-
-            //영속상태에서의 1차 캐시, 쓰기지연 sql 저장소
-//            Member member = em.find(Member.class, 101L);
-//            Member member2 = em.find(Member.class, 101L);
-
-            Member member = new Member(155L,"A");
-            Member member2 = new Member(165L,"B");
-
+            System.out.println("===================");
             em.persist(member);
-            System.out.println("================================");
             em.persist(member2);
+            em.persist(member3);
+            em.persist(member4);
+            em.persist(member5);
+            System.out.println("member.getId() :" + member.getId());
+            System.out.println("member2.getId() :" + member2.getId());
+            System.out.println("member3.getId() :" + member3.getId());
+            System.out.println("member4.getId() :" + member4.getId());
+            System.out.println("member5.getId() :" + member5.getId());
+            System.out.println("===================");
 
-            //준영속
-/*            em.detach(member2);
-            em.detach(member);
-            em.clear();*/
-
-            //트랜잭션 커밋
             tx.commit();
 
         } catch (Exception e) {
