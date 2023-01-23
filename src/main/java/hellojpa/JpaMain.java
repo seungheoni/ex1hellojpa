@@ -18,45 +18,27 @@ public class JpaMain {
         tx.begin();
 
         try {
+            //저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
             Member member = new Member();
-            member.setUsername("micle");
-
-            Member member2 = new Member();
-            member2.setUsername("seongheon");
-
-            Member member3 = new Member();
-            member3.setUsername("gildong");
-
-            Member member4 = new Member();
-            member4.setUsername("gildong");
-
-            Member member5 = new Member();
-            member5.setUsername("gildong");
-
-
-            System.out.println("===================");
+            member.setUsername("member1");
+            member.setTeam(team);
             em.persist(member);
-            em.persist(member2);
-            em.persist(member3);
-            em.persist(member4);
-            em.persist(member5);
-            System.out.println("member.getId() :" + member.getId());
-            System.out.println("member2.getId() :" + member2.getId());
-            System.out.println("member3.getId() :" + member3.getId());
-            System.out.println("member4.getId() :" + member4.getId());
-            System.out.println("member5.getId() :" + member5.getId());
-            System.out.println("===================");
+
+            Member findMember = em.find(Member.class, member.getId());
+
+            Team findTeam = findMember.getTeam();
+            System.out.println("findTeam = " + findTeam.getName());
 
             tx.commit();
-
         } catch (Exception e) {
             tx.rollback();
         } finally {
             em.close();
             emf.close();
         }
-
-
-
     }
 }
